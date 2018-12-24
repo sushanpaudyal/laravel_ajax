@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Contact;
+use Yajra\DataTables\DataTables;
+
 
 class ContactController extends Controller
 {
@@ -81,4 +84,15 @@ class ContactController extends Controller
     {
         //
     }
+
+
+    public function AllContact(){
+        $contact = Contact::all();
+        return Datatables::of($contact)
+            ->addColumn('action', function($contact){
+                '<a onclick="showData('.$contact->id.')" class="btn btn-sm btn-success"> Show </a>' . ' '.
+                 '<a onclick="editForm('.$contact->id.')" class="btn btn-sm btn-primary"> Edit </a>' . ' ' .
+                '<a onclick="deleteData('.$contact->id.')" class="btn btn-sm btn-danger">Delete</a>';
+            })->make(true);
+}
 }

@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-ROute::resource('contact', 'ContactController');
+Route::resource('contact', 'ContactController');
+
+Route::get('/all/contact', 'ContactController@AllContact');
